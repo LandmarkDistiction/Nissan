@@ -1,0 +1,36 @@
+node{
+  def mavenHome  =  tool name:'maven3.8.6'
+stage('1clonecode'){
+ //sh "git clone https://github.com/LandmarkDistiction/Nissan.git"
+ git "https://github.com/LandmarkDistiction/maven-web-application.git"
+  }
+stage('2Test&Build'){
+  sh "${mavenHome}/bin/mvn clean package"
+ }
+stage('3CodeQualty'){
+    sh "${mavenHome}/bin/mvn sonar:sonar"
+}
+stage('4UploadArtifact'){
+   sh "${mavenHome}/bin/mvn deploy"
+  }              
+stage('5deploy2UAT'){
+ sh "echo 'deploy to UAT'"
+ deploy adapters: [tomcat9(credentialsId: 'tomcat-credentials', path: '', url: 'http://52.53.189.193:8080/')], contextPath: null, war: 'target/*war'
+  }
+stage('6approvalGate'){
+  sh "echo 'ready for review'"
+  timeout(time:5, unit:'DAYS') {
+  input message: 'Application is ready for deploy, please review and approve'
+   }
+}
+stage('7deploy2Prod'){
+  deploy adapters: [tomcat9(credentialsId: 'tomcat-credentials', path: '', url: 'http://52.53.189.193:8080/')], contextPath: null, war: 'target/*war'
+  }
+stage('8emailNotification'){
+    emailext body: '''Hi, All
+Please check Build Status
+
+
+Kehinde Ajayi''', recipientProviders: [buildUser(), developers(), upstreamDevelopers()], subject: 'Build Status', to: 'tesla-app@gmail.com'
+  }
+}
