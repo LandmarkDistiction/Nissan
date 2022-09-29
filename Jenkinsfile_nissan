@@ -15,7 +15,7 @@ stage('4UploadArtifact'){
   }              
 stage('5deploy2UAT'){
  sh "echo 'deploy to UAT'"
- deploy adapters: [tomcat9(credentialsId: 'tomcat-credentials', path: '', url: 'http://52.53.189.193:8080/')], contextPath: null, war: 'target/*war'
+  deploy adapters: [tomcat9(credentialsId: 'tomcat-credentials', path: '', url: 'http://52.53.239.191:8080/')], contextPath: null, war: 'Target/*war'
   }
 stage('6approvalGate'){
   sh "echo 'ready for review'"
