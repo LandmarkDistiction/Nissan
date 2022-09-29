@@ -24,7 +24,7 @@ stage('6approvalGate'){
    }
 }
 stage('7deploy2Prod'){
-  deploy adapters: [tomcat9(credentialsId: 'tomcat-credentials', path: '', url: 'http://52.53.189.193:8080/')], contextPath: null, war: 'target/*war'
+  deploy adapters: [tomcat9(credentialsId: 'tomcat-credentials', path: '', url: 'http://52.53.239.191:8080/')], contextPath: null, war: 'Target/*war'
   }
 stage('8emailNotification'){
     emailext body: '''Hi, All
