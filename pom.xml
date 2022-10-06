@@ -97,13 +97,13 @@
 	    <repository>
 	      <id>nexus</id>
 	      <name>Landmark Technologies Releases Nexus Repository</name>
-	      <url>http://204.236.161.35:8081/repository/Lexus-release/</url>
+	      <url>http://184.169.188.80:8081/repository/ttttesla-release/</url>
 	    </repository>
 	    
 	    <snapshotRepository>
 	      <id>nexus</id>
 	      <name>Landmark Technologies Snapshot Nexus Repository </name>
-	      <url>http://204.236.161.35:8081/repository/Lexus-snapshot/</url>
+	      <url>http://184.169.188.80:8081/repository/Ttttesla/</url>
 	    </snapshotRepository>
 	    
 	</distributionManagement>
